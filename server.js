@@ -15,7 +15,7 @@ server.connection({
     port: process.env.PORT || config.port 
 });
 
-server.settings.app.dbUrl = process.env.DB_URL || config.dbUrl;
+server.settings.app.dbUrl = process.env.JAWSDB_URL || config.dbUrl;
 
 /**
  * Routing Static Pages [JS, Css, Images, etc]
