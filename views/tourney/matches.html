@@ -1,0 +1,64 @@
+  <div class="container">
+    <h2> Matches for {{round}} </h2>
+    <div class="row">
+      <div class="col">
+        <table data-toggle="table" 
+            data-classes="table table-no-bordered"
+            data-search="true">
+          <thead>
+            <tr>
+              {{#if isLoggedIn}}<th>-</th>{{/if}}
+              <th data-visible="false" data-field="team1" data-searchable="false">Team1Id</th>
+              <th data-visible="false" data-field="team2" data-searchable="false">Team2Id</th>
+              <th data-visible="false" data-field="winner" data-searchable="false">Winner</th>
+              {{#if round}}{{else}}<th data-sortable="true" data-searchable="false">Round</th>{{/if}}
+              {{#if group}}{{else}}<th data-sortable="true" data-searchable="false">Group</th>{{/if}}
+              <th data-sortable="true" data-searchable="false">Date</th>
+              <th data-sortable="true" data-field="team1Name" data-formatter="winnerFormatter">Team 1</th>
+              <th data-sortable="true" data-field="team2Name" data-formatter="winnerFormatter">Team 2</th>
+              <th data-searchable="false">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+          {{#each matches}}
+              <tr>
+                  {{#if ../isLoggedIn}}
+                  <td>{{#if winner}}{{else}}<a href="/matches/score/{{id}}"><i class="material-icons">info</i></a>{{/if}}</td>
+                  {{/if}}                  
+                  <td>{{team1}}</td>
+                  <td>{{team2}}</td>
+                  <td>{{winner}}</td>
+                  {{#if ../round}}{{else}}<td>{{round}}</td>{{/if}}
+                  {{#if ../group}}{{else}}<td>{{group}}</td>{{/if}}
+                  <td>{{matchDate}}</td>
+                  <td>{{team1Name}}</td>
+                  <td>{{team2Name}}</td>
+                  <td>{{#if winner}}
+                        ({{team1game1}}-{{team2game1}}) ({{team1game2}}-{{team2game2}})
+                        {{#if team1game3}}({{team1game3}}-{{team2game3}}){{/if}}
+                      {{else}}-{{/if}}
+                  </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function winnerFormatter(value, row) {
+      if(row.winner){
+        if(row.winner == row.team1){
+          if(this.field=="team1Name"){
+            return value+'<i class="material-icons">stars</i>';
+          }
+        }else{
+          if(this.field=="team2Name"){
+            return value+'<i class="material-icons">stars</i>';
+          }
+        }
+      }
+      return value;
+    }
+  </script>

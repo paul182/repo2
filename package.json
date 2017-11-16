@@ -1,0 +1,21 @@
+{
+  "name": "bbc-tournament-2017",
+  "version": "1.0.0",
+  "description": "Burlington Badminton Club 2017 Tournament",
+  "license": "UNLICENSED",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "praveen p",
+  "dependencies": {
+    "handlebars": "^4.0.3",
+    "hapi": "^10.4.1",
+    "inert": "^3.1.0",
+    "vision": "^3.0.0",
+    "lodash": "^4.17.4",
+    "mysql": "latest",
+    "roundrobin": "latest",
+    "async": "latest"
+  }
+}

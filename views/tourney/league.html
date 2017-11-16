@@ -1,0 +1,34 @@
+<div class="container">
+    <h2>{{pageTitle}}</h2>
+
+    {{! TODO: Will need to revisit for knockout stages}}
+
+	{{#each groups}}
+		<h4>Group {{@key}}</h4>
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Team</th>
+						<th>Match Points</th>
+						<th>Game Points</th>
+						<th>Point Diff</th>
+					</tr>
+				</thead>
+				<tbody>
+				{{#each this}}
+					<tr>
+						<td>{{standing}}</td>
+						<td>{{teamName}}</td>
+						<td>{{matchPoint}}</td>
+						<td>{{gamePoint}}</td>
+						<td>{{pointDiff}}</td>
+					</tr>
+				{{/each}}
+				</tbody>
+			</table>
+		</div>
+		<p>For Group {{@key}} match details.... <a href="/matches/{{../round}}/{{@key}}">visit</a>
+	{{/each}}
+</div>
