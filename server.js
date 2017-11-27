@@ -16,6 +16,8 @@ server.connection({
 });
 
 server.settings.app.dbUrl = process.env.JAWSDB_URL || config.dbUrl;
+server.settings.app.pwdKey = process.env.PWD_KEY || config.pwdKey;
+server.settings.app.pwdHash = process.env.PWD_HASH || config.pwdHash;
 
 /**
  * Routing Static Pages [JS, Css, Images, etc]
@@ -28,11 +30,15 @@ server.register(require('inert'), function(err) {
 	}
 	
 	server.route({
-		method : 'GET', path : '/public/{path*}', handler : {
-			directory : {
-				path : './public',
-				listing : false,
-				index : false
+		method : 'GET', path : '/public/{path*}', 
+		config :{
+			auth: false,
+			handler : {
+				directory : {
+					path : './public',
+					listing : false,
+					index : false
+				}
 			}
 		}
 	});
@@ -48,8 +54,8 @@ server.register(require('inert'), function(err) {
 var plugins = [
 	
 	{ register : require('vision') }, //register Vision with others Plugins
-	{ register : require('./modules/employees/index.js') }
-	
+	{ register : require('hapi-auth-cookie')},
+    { register : require('./modules/auth')}
 ];
 
 

@@ -1,20 +1,40 @@
 "use strict"
 
-const _ = require('lodash');
-
 module.exports = function(basedir) {
     return [
       { 
         method: 'GET', 
         path: '/', 
-        handler: function(request, reply) {      
-          reply.view('home/home', {title : 'Home'});      
-        } 
+        config: {
+            auth: false,
+            handler: function(request, reply) { 
+                      reply.view('home/home', {title : 'Home', navHome : true});      
+                    }
+        }         
+      },
+      { 
+        method: 'GET', 
+        path: '/login', 
+        config: {
+            auth: false,
+            handler: function(request, reply) { 
+                      reply.view('home/login', {title : 'Login', navHome : true, next: request.params.next });      
+                    }
+        }         
+      },
+      { 
+        method: 'POST', 
+        path: '/login', 
+        config: {
+            auth: false,
+            handler: {LoginHandler : {}}
+        }
       },
       {
         method : 'GET',
         path : '/league/{round}',
         config: {
+            auth: false,
             handler: {LeagueHandler : {"view" : "tourney/league"}}
         }
       },
@@ -22,14 +42,29 @@ module.exports = function(basedir) {
         method: 'GET', 
         path: '/matches/{round}/{group?}', 
         config: {
+            auth: false,
             handler: {MatchViewHandler : {"view" : "tourney/matches"}}
         }
       },
       { 
         method: 'GET', 
-        path: '/matches/score/{matchId}', 
+        path: '/matches/score/{matchId?}', 
         config: {
             handler: {MatchScoreHandler : {"view" : "tourney/score"}}
+        }
+      },
+      { 
+        method: 'GET', 
+        path: '/initLeague', 
+        config: {
+            handler: {InitLeagueHandler : {}}
+        }
+      },
+      { 
+        method: 'POST', 
+        path: '/matches/score', 
+        config: {
+            handler: {MatchSaveHandler : {}}
         }
       }
     ];

@@ -16,6 +16,8 @@ module.exports = (options, server, request, reply) => {
 
 
     const context = {};
+    context.title = `Round ${request.params.round} Results`;
+    context.navMatches = true;
     context.round = `Round ${request.params.round}  ${request.params.group ? 'Group ' + `${request.params.group}` : ''}`;
     context.group = request.params.group;
 
@@ -29,10 +31,7 @@ module.exports = (options, server, request, reply) => {
     connection.query(matchesQuery, function(err, rows, fields) {
       if (err) throw err;
       context.matches = rows;
-      return reply.view(options.view, context);
+      reply.view(options.view, context);
+      return connection.end();
     });
-
-    connection.end();
-   
-
 };

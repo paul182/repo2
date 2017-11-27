@@ -30,18 +30,18 @@
             {{else}}
               <tr>
                 <td>Set 1</td>
-                <td><input type="text" name="team1game1" maxlength="2" size="2" class="form-control" /></td>
-                <td><input type="text" name="team2game1" maxlength="2" size="2" class="form-control" /></td>
+                <td><input type="text" name="team1game1" maxlength="2" size="2" class="form-control team1game1" /></td>
+                <td><input type="text" name="team2game1" maxlength="2" size="2" class="form-control team2game1" /></td>
               </tr>
               <tr>
                 <td>Set 2</td>
-                <td><input type="text" name="team1game2" maxlength="2" size="2" class="form-control" /></td>
-                <td><input type="text" name="team2game2" maxlength="2" size="2" class="form-control" /></td>
+                <td><input type="text" name="team1game2" maxlength="2" size="2" class="form-control team1game2" /></td>
+                <td><input type="text" name="team2game2" maxlength="2" size="2" class="form-control team2game2" /></td>
               </tr>
               <tr>
                 <td>Set 3</td>
-                <td><input type="text" name="team1game3" maxlength="2" size="2" class="form-control" /></td>
-                <td><input type="text" name="team2game3" maxlength="2" size="2" class="form-control" /></td>
+                <td><input type="text" name="team1game3" maxlength="2" size="2" class="form-control team1game3" /></td>
+                <td><input type="text" name="team2game3" maxlength="2" size="2" class="form-control team2game3" /></td>
               </tr>
             {{/if}}
 
@@ -49,33 +49,59 @@
         </table>
           {{#if match.winner}}
           {{else}}
-            {{#if isLoggedIn}}
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gameOverModal">Game Over</button>
-            {{/if}}
+            <button type="button" id="btnGameOver" class="btn btn-primary">Game Over</button>
           {{/if}}
       </div>
       <form>
   </div>
 
-{{#if isLoggedIn}}
-  <!-- Modal -->
-  <div class="modal fade" id="gameOverModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Confirm Game Over</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      </div>
-      <div class="modal-body">
-      <p><span class="mdlRefree">Binu</span>, Please comnirm that <span class="mdlWinner">Vijay & ANu</span> won the match with a score of <span class="mdlWinner">(21-12) (14-21) (22-30)</span>. This cannot be changed.</p>
-      </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" id="btnGameOverCancel" data-dismiss="modal">Cancel</button>
-      <button type="button" class="btn btn-primary" id="btnGameOverConfirm" >Confirm</button>
-      </div>
+
+<!-- Modal -->
+<div class="modal fade" id="gameOverModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Confirm Game Over</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
     </div>
+    <div class="modal-body">
+    <p><span class="mdlRefree">Please comnirm that <span class="mdlWinnerName">Vijay & ANu</span> won the match with a score of <span class="mdlWinnerScore">(21-12) (14-21) (22-30)</span>. This cannot be changed.</p>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" id="btnGameOverCancel" data-dismiss="modal">Cancel</button>
+    <button type="button" class="btn btn-primary" id="btnGameOverConfirm" >Confirm</button>
     </div>
   </div>
-{{/if}}
+  </div>
+</div>
+
+<div class="modal fade" id="badScoreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Bad Score</h4>
+    </div>
+    <div class="modal-body">
+    <p>Somethings wrong with the entered score. Please validate the score.</p>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+<script>
+  matchDetails = {
+    round: '{{match.round}}',
+    matchId : {{match.id}},
+    team1Name : '{{match.team1Name}}',
+    team2Name : '{{match.team2Name}}',
+    team1Id : {{match.team1}},
+    team2Id : {{match.team2}}
+  };
+</script>

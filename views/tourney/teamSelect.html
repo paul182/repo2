@@ -1,0 +1,36 @@
+  <div class="container">
+    <h2>Select a match to record score</h2>
+    <form>
+      <div class="form-group">
+        <label for="selectRound">Select Round</label>
+        <select class="form-control" id="selectRound">
+          <option disabled>Select Round</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="selectGroup">Select Group</label>
+        <select class="form-control" id="selectGroup">
+          <option disabled>Select Group</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="selectMatch">Select Match</label>
+        <select class="form-control" id="selectMatch">
+          <option disabled>Select Match</option>
+        </select>
+      </div>
+      <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+<script>
+  var matchList = [
+    {{#each matches}}
+      {'round' : '{{round}}',
+       'matchId' : {{id}},
+       'group' : '{{group}}',
+       'match' : '{{team1Name}} vs {{team2Name}}'
+      },
+    {{/each}}
+  ];
+</script>
