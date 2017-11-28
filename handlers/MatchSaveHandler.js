@@ -81,10 +81,10 @@ module.exports = (options, server, request, reply) => {
             t2GamesWon = 0,
             t1Points = 0,
             t2Points = 0;
-        request.payload.t1g1 > request.payload.t2g1? t1GamesWon++ : t2GamesWon++;
-        request.payload.t1g2 > request.payload.t2g2? t1GamesWon++ : t2GamesWon++;
+        parseInt(request.payload.t1g1) > parseInt(request.payload.t2g1)? t1GamesWon++ : t2GamesWon++;
+        parseInt(request.payload.t1g2) > parseInt(request.payload.t2g2)? t1GamesWon++ : t2GamesWon++;
         if(!isNaN(request.payload.t1g3)){
-            request.payload.t1g3 > request.payload.t2g3? t1GamesWon++ : t2GamesWon++;
+            parseInt(request.payload.t1g3) > parseInt(request.payload.t2g3)? t1GamesWon++ : t2GamesWon++;
             t1Points = t1Points + parseInt(request.payload.t1g3);
             t2Points = t2Points + parseInt(request.payload.t2g3);
         }
