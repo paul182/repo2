@@ -139,7 +139,6 @@ module.exports = (options, server, request, reply) => {
                                 team
                                 ];
 
-            console.log(updateParams);
             connection.query(updateTeamStats, updateParams, function(err, result, fields) {
               cb(err);
             });
