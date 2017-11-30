@@ -9,7 +9,23 @@
               <td>{{match.team1Name}}</td>
               <td>{{match.team2Name}}</td>
             </tr>
-            {{#if match.winner}}
+            {{#if editMode}}
+              <tr>
+                <td>Set 1</td>
+                <td><input type="text" name="team1game1" maxlength="2" size="2" class="form-control team1game1" value="{{match.team1game1}}"/></td>
+                <td><input type="text" name="team2game1" maxlength="2" size="2" class="form-control team2game1" value="{{match.team2game1}}"/></td>
+              </tr>
+              <tr>
+                <td>Set 2</td>
+                <td><input type="text" name="team1game2" maxlength="2" size="2" class="form-control team1game2" value="{{match.team1game2}}"/></td>
+                <td><input type="text" name="team2game2" maxlength="2" size="2" class="form-control team2game2" value="{{match.team2game2}}"/></td>
+              </tr>
+              <tr>
+                <td>Set 3</td>
+                <td><input type="text" name="team1game3" maxlength="2" size="2" class="form-control team1game3" value="{{match.team1game3}}"/></td>
+                <td><input type="text" name="team2game3" maxlength="2" size="2" class="form-control team2game3" value="{{match.team2game3}}"/></td>
+              </tr>
+            {{else}}
               <tr>
                 <td>Set 1</td>
                 <td>{{match.team1game1}}</td>
@@ -27,28 +43,11 @@
                   <td>{{match.team2game3}}</td>
                 </tr>
               {{/if}}
-            {{else}}
-              <tr>
-                <td>Set 1</td>
-                <td><input type="text" name="team1game1" maxlength="2" size="2" class="form-control team1game1" /></td>
-                <td><input type="text" name="team2game1" maxlength="2" size="2" class="form-control team2game1" /></td>
-              </tr>
-              <tr>
-                <td>Set 2</td>
-                <td><input type="text" name="team1game2" maxlength="2" size="2" class="form-control team1game2" /></td>
-                <td><input type="text" name="team2game2" maxlength="2" size="2" class="form-control team2game2" /></td>
-              </tr>
-              <tr>
-                <td>Set 3</td>
-                <td><input type="text" name="team1game3" maxlength="2" size="2" class="form-control team1game3" /></td>
-                <td><input type="text" name="team2game3" maxlength="2" size="2" class="form-control team2game3" /></td>
-              </tr>
             {{/if}}
 
           </tbody>
         </table>
-          {{#if match.winner}}
-          {{else}}
+          {{#if editMode}}
             <button type="button" id="btnGameOver" class="btn btn-primary">Game Over</button>
           {{/if}}
       </div>
@@ -102,6 +101,7 @@
     team1Name : '{{match.team1Name}}',
     team2Name : '{{match.team2Name}}',
     team1Id : {{match.team1}},
-    team2Id : {{match.team2}}
+    team2Id : {{match.team2}},
+    editMode : {{editMode}}
   };
 </script>

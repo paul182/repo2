@@ -55,6 +55,13 @@ module.exports = function(basedir) {
       },
       { 
         method: 'GET', 
+        path: '/matches/score/edit/{matchId?}', 
+        config: {
+            handler: {MatchScoreHandler : {"view" : "tourney/score", "mode" : "edit"}}
+        }
+      },
+      { 
+        method: 'GET', 
         path: '/initLeague', 
         config: {
             handler: {InitLeagueHandler : {}}
@@ -65,6 +72,13 @@ module.exports = function(basedir) {
         path: '/matches/score', 
         config: {
             handler: {MatchSaveHandler : {}}
+        }
+      },
+      { 
+        method: 'POST', 
+        path: '/matches/score/edit', 
+        config: {
+            handler: {EditScoreHandler : {}}
         }
       }
     ];

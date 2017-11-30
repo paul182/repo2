@@ -2,15 +2,11 @@
 const async = require('async');
 const mysql = require('mysql');
 const _ = require('lodash');
-const firstBy = require('thenby');
+const rankGroup = require('../shared/rankGroup');
 
 module.exports = (options, server, request, reply) => {
 
     // Saves the match score in the DB. Calculates the group standings
-
-    /* TODO:
-     * - Add login validation
-     */
    
     var connection = mysql.createConnection(server.settings.app.dbUrl),
         context = {};
@@ -132,44 +128,8 @@ module.exports = (options, server, request, reply) => {
         });
     }
 
-    const rankGroup = function(cb){
-
-        const leagueQuery = `select t1.team, won AS matchPoint, 
-            (gamesWon-gamesLost) AS gamePoint, 
-            (pointsWon - pointsLost) AS pointDiff,
-            IFNULL(teamsBeaten, "") AS teamsBeaten
-            from league t1 
-            where round = '${context.match.round}' and t1.group = '${context.match.group}'
-            order by matchPoint desc, gamePoint desc, pointDiff desc`;
-
-        connection.query(leagueQuery, function(err, rows, fields) {
-            if (err) {
-                cb(err);
-            }else {
-                var currentStand = 1;
-
-                var sortedRows = rows.sort(
-                    firstBy("matchPoint", {direction:-1})
-                    .thenBy(function (v1, v2) {return v2.teamsBeaten.indexOf(`~${v1.team}~`); })
-                    .thenBy("gamePoint", {direction:-1})
-                    .thenBy("pointDiff", {direction:-1})
-                );
-
-                async.eachOf(sortedRows, updateStanding, function(err){
-                  cb(err);
-                });                
-            }
-        });
-    }
-
-    const updateStanding = function(row, idx, cb){
-        const updateStandingQuery = `update league l set 
-            l.standing = ${idx} + 1
-            where round = '${context.match.round}' and l.group = '${context.match.group}' and team = '${row.team}'`;
-
-        connection.query(updateStandingQuery, function(err, result, fields) {
-            cb(err);
-        });        
+    const rankGroupAsync = function(cb){
+      rankGroup(connection, context.match.round, context.match.group, cb);
     }
 
     async.waterfall([
@@ -177,7 +137,7 @@ module.exports = (options, server, request, reply) => {
         isMatchAlreadyUpdated,
         updateMatchResult,
         updateTeamStats,
-        rankGroup
+        rankGroupAsync
     ], function (err, result) {
     
         if(err){

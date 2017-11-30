@@ -21,6 +21,11 @@ burlingtonBadminton = {
 
         },
         saveScore: function () {
+
+        	var postUrl = "/matches/score";
+        	if(matchDetails.editMode){
+        		postUrl = "/matches/score/edit";
+        	}
         	
 			$('#btnGameOver').click(function() {
 				if(UTIL.isGameOver()){
@@ -36,7 +41,7 @@ burlingtonBadminton = {
 			$('#btnGameOverConfirm').click(function() {
 				$.ajax({
 					type: "POST",
-					url: "/matches/score",
+					url: postUrl,
 					data: matchDetails
 				}).done(function(data) {
 					if(data.success){
@@ -79,10 +84,14 @@ burlingtonBadminton = {
 
 			$('#selectRound').trigger('change');
 
+			var editLocation = "/matches/score/";
+			if(window.location.href.indexOf("edit") > 0){
+				editLocation = "/matches/score/edit/";
+			}
 			$('#btnSubmit').click(function() {
 				var selectedMatch = $('#selectMatch').val();
 				if(selectedMatch){
-					window.location.href = "/matches/score/" + selectedMatch;
+					window.location.href = editLocation + selectedMatch;
 				};
 			}); 
         },

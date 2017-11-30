@@ -7,6 +7,7 @@ module.exports = (options, server, request, reply) => {
     const context = {};
     context.navScore = true;
     context.title = "Admin: Update match score";
+    context.editMode = options.mode == "edit"? true : false;
     
 
     // View for displaying the blank score card
@@ -29,6 +30,9 @@ module.exports = (options, server, request, reply) => {
       connection.query(matchQuery, function(err, rows, fields) {
         if (err) throw err;
         context.match = rows[0];
+        if(context.match.winner){}else{
+          context.editMode = true;
+        }
         reply.view(options.view, context);
         return connection.end();
       });
@@ -39,11 +43,11 @@ module.exports = (options, server, request, reply) => {
         b.Name AS team2Name
         FROM team a INNER JOIN matches m ON m.team1 = a.id
         INNER JOIN team b ON m.team2 = b.id
-        where m.winner is null`;
+        where m.winner is ${context.editMode? "NOT" : ""} null`;
 
         connection.query(matchesQuery, function(err, rows, fields) {
           if (err) throw err;          
-          context.matches = rows;
+          context.matches = rows;          
           reply.view("tourney/teamSelect", context);
           return connection.end();
         });
