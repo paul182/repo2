@@ -7,10 +7,8 @@ module.exports = function(basedir) {
         path: '/', 
         config: {
             auth: false,
-            handler: function(request, reply) { 
-                      reply.view('home/home', {title : 'Home', navHome : true});      
-                    }
-        }         
+            handler: {ContentHandler : {"view" : "home/home", "contentSlug" : "bbc-home", "navPage" : "home"}}
+        }       
       },
       { 
         method: 'GET', 
@@ -72,7 +70,7 @@ module.exports = function(basedir) {
         path: '/rules', 
         config: {
             auth: false,
-            handler: {ContentHandler : {"view" : "home/rules", "contentSlug" : "bbc-rules"}}
+            handler: {ContentHandler : {"view" : "home/rules", "contentSlug" : "bbc-rules", "navPage" : "rules"}}
         }
       },
       { 
