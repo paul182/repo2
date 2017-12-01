@@ -3,5 +3,6 @@ module.exports = {
     port: '80',
     dbUrl: 'mysql',
     pwdHash: 'cookies',
-    pwdKey: 'candy'
+    pwdKey: 'candy',
+    wpDomain: 'bbc.wordpress.com'
 };

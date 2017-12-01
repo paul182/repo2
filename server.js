@@ -18,6 +18,7 @@ server.connection({
 server.settings.app.dbUrl = process.env.JAWSDB_URL || config.dbUrl;
 server.settings.app.pwdKey = process.env.PWD_KEY || config.pwdKey;
 server.settings.app.pwdHash = process.env.PWD_HASH || config.pwdHash;
+server.settings.app.wpDomain = process.env.WP_DOMAIN || config.wpDomain;
 
 /**
  * Routing Static Pages [JS, Css, Images, etc]

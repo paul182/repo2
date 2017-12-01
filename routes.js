@@ -68,6 +68,14 @@ module.exports = function(basedir) {
         }
       },
       { 
+        method: 'GET', 
+        path: '/rules', 
+        config: {
+            auth: false,
+            handler: {ContentHandler : {"view" : "home/rules", "contentSlug" : "bbc-rules"}}
+        }
+      },
+      { 
         method: 'POST', 
         path: '/matches/score', 
         config: {
