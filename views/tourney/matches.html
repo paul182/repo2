@@ -13,7 +13,6 @@
               <th data-visible="false" data-field="winner" data-searchable="false">Winner</th>
               {{#if round}}{{else}}<th data-sortable="true" data-searchable="false">Round</th>{{/if}}
               {{#if group}}{{else}}<th data-sortable="true" data-searchable="false">Group</th>{{/if}}
-              <th data-sortable="true" data-searchable="false">Date</th>
               <th data-sortable="true" data-field="team1Name" data-formatter="winnerFormatter">Team 1</th>
               <th data-sortable="true" data-field="team2Name" data-formatter="winnerFormatter">Team 2</th>
               <th data-searchable="false">Score</th>
@@ -30,7 +29,6 @@
                   <td>{{winner}}</td>
                   {{#if ../round}}{{else}}<td>{{round}}</td>{{/if}}
                   {{#if ../group}}{{else}}<td>{{group}}</td>{{/if}}
-                  <td>{{matchDate}}</td>
                   <td>{{team1Name}}</td>
                   <td>{{team2Name}}</td>
                   <td>{{#if winner}}
