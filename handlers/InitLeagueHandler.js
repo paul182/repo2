@@ -4,6 +4,13 @@ const mysql = require('mysql');
 
 module.exports = (options, server, request, reply) => {
 
+    var currentDate = new Date(),
+        cutOffDate = new Date('2017-12-02');
+
+    if(currentDate > cutOffDate){
+        return reply('Cannot Clear anymore...');
+    }
+
     var connection = mysql.createConnection(server.settings.app.dbUrl);
 
     const matchUpdateQuery = `update matches t1 set team1game1 = 0, team1game2 = 0, team1game3 = null,
