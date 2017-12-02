@@ -9,7 +9,7 @@
               <td>{{match.team1Name}}</td>
               <td>{{match.team2Name}}</td>
             </tr>
-            {{#if editMode}}
+            {{#if editMode || newMatch}}
               <tr>
                 <td>Set 1</td>
                 <td><input type="text" name="team1game1" maxlength="2" size="2" class="form-control team1game1" value="{{match.team1game1}}"/></td>
@@ -47,7 +47,7 @@
 
           </tbody>
         </table>
-          {{#if editMode}}
+          {{#if editMode || newMatch}}
             <button type="button" id="btnGameOver" class="btn btn-primary">Game Over</button>
           {{/if}}
       </div>
