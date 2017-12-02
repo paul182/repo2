@@ -8,6 +8,7 @@ module.exports = (options, server, request, reply) => {
     context.navScore = true;
     context.title = "Admin: Update match score";
     context.editMode = options.mode == "edit"? true : false;
+    context.showInEditMode = context.editMode;
     
 
     // View for displaying the blank score card
@@ -30,11 +31,11 @@ module.exports = (options, server, request, reply) => {
       connection.query(matchQuery, function(err, rows, fields) {
         if (err) throw err;
         context.match = rows[0];
-        if(context.match.winner){
-          context.newMatch = false;
-        }else{
-          context.newMatch = true;
+        if(context.match.winner){}else{
+            context.showInEditMode = true;
         }
+
+        if()
         reply.view(options.view, context);
         return connection.end();
       });
