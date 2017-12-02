@@ -90,8 +90,8 @@ module.exports = (options, server, request, reply) => {
             for (var i = 0; i < rows.length; i++) { 
 
               if(rows[i].team1 == team){
-                lPointsWon = parseInt(rows[i].team1game1) + parseInt(rows[i].team1game2);
-                lPointsLost = parseInt(rows[i].team2game1) + parseInt(rows[i].team2game2);
+                lPointsWon = lPointsWon + parseInt(rows[i].team1game1) + parseInt(rows[i].team1game2);
+                lPointsLost = lPointsLost + parseInt(rows[i].team2game1) + parseInt(rows[i].team2game2);
                 parseInt(rows[i].team1game1) > parseInt(rows[i].team2game1) ? lGamesWon++ : lGamesLost++;
                 parseInt(rows[i].team1game2) > parseInt(rows[i].team2game2) ? lGamesWon++ : lGamesLost++;
 
@@ -106,8 +106,8 @@ module.exports = (options, server, request, reply) => {
                   lteamsbeaten = lteamsbeaten + `~${rows[i].team2}~`;
                 }
               }else{
-                lPointsWon = parseInt(rows[i].team2game1) + parseInt(rows[i].team2game2);
-                lPointsLost = parseInt(rows[i].team1game1) + parseInt(rows[i].team1game2);
+                lPointsWon = lPointsWon + parseInt(rows[i].team2game1) + parseInt(rows[i].team2game2);
+                lPointsLost = lPointsLost + parseInt(rows[i].team1game1) + parseInt(rows[i].team1game2);
                 parseInt(rows[i].team2game1) > parseInt(rows[i].team1game1) ? lGamesWon++ : lGamesLost++;
                 parseInt(rows[i].team2game2) > parseInt(rows[i].team1game2) ? lGamesWon++ : lGamesLost++;
                
