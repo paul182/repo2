@@ -30,7 +30,7 @@ module.exports = (options, server, request, reply) => {
       connection.query(matchQuery, function(err, rows, fields) {
         if (err) throw err;
         context.match = rows[0];
-        if(context.match.winner){
+        if(!context.editMode && !context.match.winner){
           context.editMode = true;
         }
         reply.view(options.view, context);
