@@ -34,8 +34,7 @@ module.exports = (options, server, request, reply) => {
         if(context.match.winner){}else{
             context.showInEditMode = true;
         }
-
-        if()
+        
         reply.view(options.view, context);
         return connection.end();
       });
