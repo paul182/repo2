@@ -33,3 +33,7 @@ This is a set of standalone tasks that can be executed - eg: generate round robi
 
 ## Tutorial
 [Sample Project of Node.js with Hapi and Boostrap](http://teknosains.com/i/sample-project-of-nodejs-with-hapi-and-boostrap)
+
+## Known Issues
+
+* With version 8 of hapi-auth-cookie gets a startup error "Error: Invalid plugin options; attributes is required"
