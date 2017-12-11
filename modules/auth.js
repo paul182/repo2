@@ -22,7 +22,8 @@ exports.register = function (server, options, next) {
             }
         }
     });
-    next();
+
+    return next();
 };
 
 exports.register.attributes = {
