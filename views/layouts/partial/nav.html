@@ -10,11 +10,17 @@
             <a class="nav-link" href="/">Home</a>
             <!-- <span class="sr-only">(current)</span> -->
           </li>
-          <li class="nav-item {{#if navLeague}}active{{/if}}">
-            <a class="nav-link" href="/league/1">League</a>
+          <li class="nav-item dropdown {{#if navLeague}}active{{/if}}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Standings
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/league/QF">Quarter Finals</a>
+              <a class="dropdown-item" href="/league/1">Round 1</a>
+            </div>
           </li>
           <li class="nav-item {{#if navMatches}}active{{/if}}">
-            <a class="nav-link" href="/matches/1">Matches</a>
+            <a class="nav-link" href="/matches/QF">Matches</a>
           </li>
           <li class="nav-item {{#if navScore}}active{{/if}}">
             <a class="nav-link" href="/matches/score">Referee</a>
